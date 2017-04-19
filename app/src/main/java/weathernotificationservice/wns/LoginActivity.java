@@ -1,23 +1,11 @@
 package weathernotificationservice.wns;
-import android.Manifest;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.view.LayoutInflater;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,12 +16,13 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import butterknife.ButterKnife;
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String HOME_ACTIVITIES = "weathernotificationservice.wns.activity_main";
@@ -48,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private AccessTokenTracker accessTokenTracker;
     private AccessToken accessToken;
+    private ProfileTracker profileTracker;
 
 
     @Override
@@ -85,33 +75,42 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d("LOGIN_SUCCESS", "Success");
-
+                Toast.makeText(getBaseContext(), "Login Success", Toast.LENGTH_LONG).show();
                 finish();//<- IMPORTANT
             }
 
             @Override
             public void onCancel() {
-
+                Log.d("LOGIN_CANCEL", "Cancel");
             }
 
             @Override
             public void onError(FacebookException error) {
-
+                Log.d("LOGIN_ERROR", "Error");
+                Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_LONG).show();
             }
         });
+
 
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(
                     AccessToken oldAccessToken,
                     AccessToken currentAccessToken) {
-                // Set the access token using
-                // currentAccessToken when it's loaded or set.
-            }
-        };
+                        // Set the access token using
+                        // currentAccessToken when it's loaded or set.
+                    }
+                };
         // If the access token is available already assign it.
         accessToken = AccessToken.getCurrentAccessToken();
-
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(
+                    Profile oldProfile,
+                    Profile currentProfile) {
+                // App code
+            }
+        };
     }
 
 
