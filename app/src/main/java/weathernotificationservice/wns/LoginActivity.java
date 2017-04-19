@@ -1,19 +1,27 @@
 package weathernotificationservice.wns;
-
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import butterknife.ButterKnife;
-import butterknife.Bind;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -21,16 +29,14 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
-import com.facebook.ProfileTracker;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import java.util.Arrays;
+import butterknife.ButterKnife;
+import butterknife.Bind;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String HOME_ACTIVITIES = "weathernotificationservice.wns.activity_main";
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
@@ -42,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private AccessTokenTracker accessTokenTracker;
     private AccessToken accessToken;
-    private ProfileTracker profileTracker;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,27 +77,29 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //Facebook
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // App code
-                    }
+        callbackManager= CallbackManager.Factory.create();
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email", "public_profile");
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d("LOGIN_SUCCESS", "Success");
 
-                    @Override
-                    public void onCancel() {
-                        // App code
-                    }
+                finish();//<- IMPORTANT
+            }
 
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                    }
-                });
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(
@@ -101,16 +109,11 @@ public class LoginActivity extends AppCompatActivity {
                 // currentAccessToken when it's loaded or set.
             }
         };
+        // If the access token is available already assign it.
+        accessToken = AccessToken.getCurrentAccessToken();
 
-        profileTracker = new ProfileTracker() {
-            @Override
-            protected void onCurrentProfileChanged(
-                    Profile oldProfile,
-                    Profile currentProfile) {
-                // App code
-            }
-        };
     }
+
 
     public void login() {
         Log.d(TAG, "Login");
@@ -147,9 +150,17 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-                super.onActivityResult(requestCode, resultCode, data);
-                callbackManager.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_SIGNUP) {
+            if (resultCode == RESULT_OK) {
+                // TODO: Implement successful signup logic here
+                // By default we just finish the Activity and log them in automatically
+                this.finish();
+            }
+        }
 
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        this.finish();
     }
 
     @Override
@@ -191,7 +202,6 @@ public class LoginActivity extends AppCompatActivity {
 
         return valid;
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
