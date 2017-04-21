@@ -1,4 +1,4 @@
-package weathernotificationservice.wns;
+package weathernotificationservice.wns.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import weathernotificationservice.wns.*;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -88,7 +90,7 @@ public class SignupActivity extends AppCompatActivity {
                                     Toast.makeText(SignupActivity.this, ""+task.getException().getMessage(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                    startActivity(new Intent(SignupActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
                                     finish();
                                 }
                             }

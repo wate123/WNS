@@ -1,4 +1,4 @@
-package weathernotificationservice.wns;
+package weathernotificationservice.wns.activities;
 
 public class User {
     private String id;

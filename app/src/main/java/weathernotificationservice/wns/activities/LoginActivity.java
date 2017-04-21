@@ -1,4 +1,4 @@
-package weathernotificationservice.wns;
+package weathernotificationservice.wns.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,9 +26,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.facebook.FacebookSdk;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import weathernotificationservice.wns.*;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -52,15 +53,15 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
             finish();
         }
 
         // set the view now
         setContentView(R.layout.activity_login);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
@@ -148,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -192,13 +193,13 @@ public class LoginActivity extends AppCompatActivity {
 //                            //Create a new User and Save it in Firebase database
 //                            User user = new User(uid,name,null,email,null);
 //                            myRef.child(uid).setValue(user);
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
                             finish();
                         } else {
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
                             finish();
                         }
 

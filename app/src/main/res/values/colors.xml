@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryLogin">#00bcd4</color>
+    <color name="colorPrimaryLogin">#2196F3</color>
     <color name="colorPrimaryDarkSign">#0097a7</color>
     <color name="colorAccentSign">#f2fe71</color>
     <color name="bg_login">#26ae90</color>

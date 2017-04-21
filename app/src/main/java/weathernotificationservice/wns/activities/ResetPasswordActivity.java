@@ -1,4 +1,4 @@
-package weathernotificationservice.wns;
+package weathernotificationservice.wns.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import weathernotificationservice.wns.R;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
