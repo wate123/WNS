@@ -27,17 +27,23 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.facebook.FacebookSdk;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
+    public User user;
     private ProgressBar progressBar;
-    private Button btnSignup, btnLogin, btnReset;
+    private Button btnSignup, btnLogin, btnReset, facebookLogin;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
 
     //FaceBook callbackManager
     private CallbackManager mCallbackManager;
     private static final String TAG = "FacebookLogin";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSignup = (Button) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnReset = (Button) findViewById(R.id.btn_reset_password);
+        facebookLogin = (Button) findViewById(R.id.facebook_login);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -69,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         //FaceBook
         FacebookSdk.sdkInitialize(getApplicationContext());
         mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = (LoginButton) findViewById(R.id.facebook_login);
+        LoginButton loginButton = (LoginButton) facebookLogin;
         loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -104,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,35 +183,28 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
+//                            String uid=task.getResult().getUser().getUid();
+//                            String name=task.getResult().getUser().getDisplayName();
+//                            String email=task.getResult().getUser().getEmail();
+//                            String image=task.getResult().getUser().getPhotoUrl().toString();
+//
+//                            //Create a new User and Save it in Firebase database
+//                            User user = new User(uid,name,null,email,null);
+//                            myRef.child(uid).setValue(user);
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            finish();
+                        } else {
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                        }else{
-                            String uid=task.getResult().getUser().getUid();
-                            String name=task.getResult().getUser().getDisplayName();
-                            String email=task.getResult().getUser().getEmail();
-                            String image=task.getResult().getUser().getPhotoUrl().toString();
-
-                            //Create a new User and Save it in Firebase database
-                            FirebaseUserUser user = new User(uid,name,null,email,null);
-
-                            mRef.child(uid).setValue(user);
-
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.putExtra("user_id",uid);
-                            intent.putExtra("profile_picture",image);
-                            startActivity(intent);
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
                         }
 
                     }
                 });
     }
-
 
 
 }
