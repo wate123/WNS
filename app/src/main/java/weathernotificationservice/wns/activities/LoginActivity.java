@@ -26,8 +26,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.facebook.FacebookSdk;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import weathernotificationservice.wns.*;
 
@@ -35,11 +33,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
-    public User user;
     private ProgressBar progressBar;
     private Button btnSignup, btnLogin, btnReset, facebookLogin;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
 
     //FaceBook callbackManager
     private CallbackManager mCallbackManager;
@@ -59,8 +54,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // set the view now
         setContentView(R.layout.activity_login);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
 
         inputEmail = (EditText) findViewById(R.id.email);
@@ -185,21 +178,12 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
                         if (!task.isSuccessful()) {
-//                            String uid=task.getResult().getUser().getUid();
-//                            String name=task.getResult().getUser().getDisplayName();
-//                            String email=task.getResult().getUser().getEmail();
-//                            String image=task.getResult().getUser().getPhotoUrl().toString();
-//
-//                            //Create a new User and Save it in Firebase database
-//                            User user = new User(uid,name,null,email,null);
-//                            myRef.child(uid).setValue(user);
                             startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
                             finish();
                         } else {
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
                             finish();
                         }
 

@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorBackground">@color/colorBackground</item>
         <item name="colorTintedBackground">@color/colorTintedBackground</item>
+
     </style>
 
 
