@@ -176,7 +176,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-
                         if (!task.isSuccessful()) {
                             startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
                             finish();
@@ -184,6 +183,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
                             finish();
                         }
 

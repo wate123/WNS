@@ -261,12 +261,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private void aboutDialog() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Weather Notification Service");
+        alert.setTitle("Weather Pop");
         final WebView webView = new WebView(this);
-        String about = "<p>A lightweight, opensource weather app.</p>" +
-                "<p>Developed by <a href='mailto:t.martykan@gmail.com'>Tomas Martykan</a></p>" +
+        String about = "<p>A weather app, created for you, that provides the functionality of secure mobile notifications connecting you with your family and friends at the touch of your fingertips.</p>" +
+                "<p>Based on Forecatie developed by <a href='mailto:t.martykan@gmail.com'>Tomas Martykan</a></p>" +
                 "<p>Data provided by <a href='http://openweathermap.org/'>OpenWeatherMap</a>, under the <a href='http://creativecommons.org/licenses/by-sa/2.0/'>Creative Commons license</a>" +
-                "<p>Icons are <a href='https://erikflowers.github.io/weather-icons/'>Weather Icons</a>, by <a href='http://www.twitter.com/artill'>Lukas Bischoff</a> and <a href='http://www.twitter.com/Erik_UX'>Erik Flowers</a>, under the <a href='http://scripts.sil.org/OFL'>SIL OFL 1.1</a> licence.";
+                "<p>Icons are <a href='https://erikflowers.github.io/weather-icons/'>Weather Icons</a>, by <a href='http://www.twitter.com/artill'>Lukas Bischoff</a> and <a href='http://www.twitter.com/Erik_UX'>Erik Flowers</a>, under the <a href='http://scripts.sil.org/OFL'>SIL OFL 1.1</a> licence.";;
         TypedArray ta = obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary, R.attr.colorAccent});
         String textColor = String.format("#%06X", (0xFFFFFF & ta.getColor(0, Color.BLACK)));
         String accentColor = String.format("#%06X", (0xFFFFFF & ta.getColor(1, Color.BLUE)));
