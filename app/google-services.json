@@ -1,0 +1,66 @@
+{
+  "project_info": {
+    "project_number": "600781218632",
+    "firebase_url": "https://wnsfirebaseproject.firebaseio.com",
+    "project_id": "wnsfirebaseproject",
+    "storage_bucket": "wnsfirebaseproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600781218632:android:74c11129b8db7ed0",
+        "android_client_info": {
+          "package_name": "weathernotificationservice.wns"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600781218632-dckmkmu7ml7no0374cd0sir5mau0b3jg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "weathernotificationservice.wns",
+            "certificate_hash": "81b3e91761e8531241885a089170bca4cfe35fe6"
+          }
+        },
+        {
+          "client_id": "600781218632-40jnimbanqqrlh8psfbo79jhptrqa0v9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "weathernotificationservice.wns",
+            "certificate_hash": "39051f78e73296f3c9b4b16b4fc35e9581ef107f"
+          }
+        },
+        {
+          "client_id": "600781218632-un9becji88intmjrtbk4nt80b0l33j94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4qLX0XUUxD6ML9LdKx1mJp1qOcvGhkEk"
+        },
+        {
+          "current_key": "AIzaSyAESLms-ORm991sW3QdzkeLjtYet91jbLI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600781218632-un9becji88intmjrtbk4nt80b0l33j94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

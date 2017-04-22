@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="weathernotificationservice.wns">
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="weathernotificationservice.wns.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".activities.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="weathernotificationservice.wns.LoginActivity" android:theme="@style/AppTheme.Dark" />
-        <activity android:name="weathernotificationservice.wns.SignupActivity" android:theme="@style/AppTheme.Dark" />
+        <activity android:name="weathernotificationservice.wns.activities.LoginActivity" android:theme="@style/AppTheme.Dark" />
+        <activity android:name="weathernotificationservice.wns.activities.SignupActivity" android:theme="@style/AppTheme.Dark" />
+        <activity android:name="weathernotificationservice.wns.activities.ResetPasswordActivity" android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+            <!--android:name=".activities.SignupActivity"-->
+            <!--android:label="@string/title_activity_login"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
@@ -32,6 +46,7 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -40,6 +55,73 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+
+        <!--<activity-->
+            <!--android:name=".activities.ResetPasswordActivity"-->
+            <!--android:label="@string/title_activity_reset_password"-->
+            <!--android:theme="@style/AppTheme.NoActionBar"></activity>-->
+
+
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:theme="@style/AppTheme" />
+
+        <receiver android:name=".widgets.ExtensiveWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/extensive_widget" />
+        </receiver>
+        <receiver android:name=".widgets.TimeWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/time_widget" />
+        </receiver>
+
+        <service
+            android:name=".widgets.DashClockWeatherExtension"
+            android:icon="@drawable/ic_cloud_white_24dp"
+            android:label="@string/app_name"
+            android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA">
+            <intent-filter>
+                <action android:name="com.google.android.apps.dashclock.Extension" />
+            </intent-filter>
+
+            <meta-data
+                android:name="protocolVersion"
+                android:value="2" />
+            <meta-data
+                android:name="worldReadable"
+                android:value="true" />
+            <meta-data
+                android:name="settingsActivity"
+                android:value=".ExampleSettingsActivity" />
+        </service>
+
+        <receiver android:name=".AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".activities.MapActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoStatusBar" />
+
+        <activity
+            android:name=".activities.GraphActivity"
+            android:label="@string/action_graphs"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
