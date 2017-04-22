@@ -1,5 +1,4 @@
-# WNS
- Weather Pop
+# Weather Pop
  A weather app, created for you, that provides the functionality of secure mobile notifications connecting you with your family and friends at the touch of your fingertips.
  
  
