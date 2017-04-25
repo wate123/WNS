@@ -6,8 +6,7 @@
  
  Create your account first
      You are able to signup or sign in with email and password or Facebook.
- It only has weather forecast right now.
- More function will coming soon.
+ It only has weather forecast right now, but more function will be coming soon.
  
  
  
