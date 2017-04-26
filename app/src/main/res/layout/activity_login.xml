@@ -86,6 +86,14 @@
             android:textColor="@color/white"
             android:textSize="15sp" />
 
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/Goosign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="visible"
+            tools:visibility="gone" />
+
         <com.facebook.login.widget.LoginButton
             android:id="@+id/facebook_login"
             android:layout_width="wrap_content"

@@ -635,6 +635,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.action_account) {
+            Intent intent = new Intent(MainActivity.this, AccountSetting.class);
+            startActivity(intent);
+        }
         if (id == R.id.action_about) {
             aboutDialog();
             return true;
