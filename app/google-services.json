@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "600781218632-slje093apaot93aane57tf4kehcap8fa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "weathernotificationservice.wns",
+            "certificate_hash": "bd8bbb8d2278c5234e1b48b1d95c2ef78d174f18"
+          }
+        },
+        {
           "client_id": "600781218632-dckmkmu7ml7no0374cd0sir5mau0b3jg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -27,6 +27,9 @@
             android:name=".activities.LoginActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
         <activity
+            android:name=".activities.Friends"
+            android:theme="@style/AppTheme.NoStatusBar" />
+        <activity
             android:name=".activities.SignupActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
         <activity
@@ -120,15 +123,14 @@
             android:name=".activities.MapActivity"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.NoStatusBar" />
+
         <activity
             android:name=".activities.GraphActivity"
             android:label="@string/action_graphs"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.AccountSetting" />
-        <activity
-            android:name=".activities.Friends"
-            android:label="@string/title_activity_friends"></activity>
+
     </application>
 
 </manifest>

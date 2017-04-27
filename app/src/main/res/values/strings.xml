@@ -39,6 +39,8 @@
     <string name="action_about">About</string>
     <string name="action_signOut">Sign Out</string>
     <string name="action_account">My Account</string>
+    <string name="action_friendlist">Friends</string>
+
 
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>

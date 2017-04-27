@@ -96,6 +96,7 @@ public class SignupActivity extends AppCompatActivity {
                                 if (!task.isSuccessful()) {
                                     Toast.makeText(SignupActivity.this, ""+task.getException().getMessage(),
                                             Toast.LENGTH_SHORT).show();
+                                    onAuthSuccess(task.getResult().getUser());
                                 } else {
                                     onAuthSuccess(task.getResult().getUser());
                                     startActivity(new Intent(SignupActivity.this, weathernotificationservice.wns.activities.MainActivity.class));

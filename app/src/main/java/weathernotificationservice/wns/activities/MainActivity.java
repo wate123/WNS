@@ -446,7 +446,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         // Pressure
         double pressure = UnitConvertor.convertPressure((float) Double.parseDouble(todayWeather.getPressure()), sp);
 
-        todayTemperature.setText(new DecimalFormat("#.#").format(temperature) + " " + sp.getString("unit", "C"));
+        todayTemperature.setText(new DecimalFormat("#.#").format(temperature) + " " + sp.getString("unit", "K"));
         todayDescription.setText(todayWeather.getDescription().substring(0, 1).toUpperCase() +
                 todayWeather.getDescription().substring(1) + rainString);
         if (sp.getString("speedUnit", "m/s").equals("bft")) {
@@ -630,6 +630,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if (id == R.id.action_location) {
             getCityByLocation();
             return true;
+        }
+        if (id == R.id.action_friendlist) {
+            Intent intent = new Intent(MainActivity.this, Friends.class);
+            startActivity(intent);
         }
         if (id == R.id.action_settings) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
