@@ -23,6 +23,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
-    private Button btnSignup, btnLogin, btnReset, facebookLogin;
+    private Button btnSignup, btnLogin, btnReset, facebookLogin ;
 
     //FaceBook callbackManager
     private CallbackManager mCallbackManager;
@@ -65,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements
 
         // set the view now
         setContentView(R.layout.activity_login);
-        findViewById(R.id.Goosign_in_button).setOnClickListener(this);
+        findViewById(R.id.sign_in_button).setOnClickListener(this);
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
@@ -85,11 +86,14 @@ public class LoginActivity extends AppCompatActivity implements
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
+        SignInButton signInButton = (SignInButton) findViewById(R.id.google_Login);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
+
         //FaceBook
         FacebookSdk.sdkInitialize(getApplicationContext());
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = (LoginButton) facebookLogin;
-        loginButton.setReadPermissions("email", "public_profile");
+        loginButton.setReadPermissions("email", "public_profile","user_friends" );
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -123,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements
                 startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
+
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -204,7 +209,7 @@ public class LoginActivity extends AppCompatActivity implements
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = auth.getCurrentUser();
+                            startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
