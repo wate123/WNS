@@ -48,9 +48,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(KEY_NAME, contact.getName());
-        values.put(KEY_PHONE, contact.getPhone());
         values.put(KEY_EMAIL, contact.getEmail());
-        values.put(KEY_ADDRESS, contact.getAddress());
         values.put(KEY_IMAGEURI, contact.getImageURI().toString());
 
         db.insert(TABLE_CONTACTS, null, values);
@@ -65,7 +63,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Contact contact = new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), Uri.parse(cursor.getString(5)));
+        Contact contact = new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(3), Uri.parse(cursor.getString(5)));
         db.close();
         cursor.close();
         return contact;
@@ -93,9 +91,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         values.put(KEY_NAME, contact.getName());
-        values.put(KEY_PHONE, contact.getPhone());
         values.put(KEY_EMAIL, contact.getEmail());
-        values.put(KEY_ADDRESS, contact.getAddress());
         values.put(KEY_IMAGEURI, contact.getImageURI().toString());
 
         int rowsAffected = db.update(TABLE_CONTACTS, values, KEY_ID + "=?", new String[] { String.valueOf(contact.getId()) });
@@ -112,7 +108,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                contacts.add(new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), Uri.parse(cursor.getString(5))));
+                contacts.add(new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1),  cursor.getString(3), Uri.parse(cursor.getString(5))));
             }
             while (cursor.moveToNext());
         }
