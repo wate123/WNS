@@ -643,12 +643,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             aboutDialog();
             return true;
         }
-        if (id == R.id.action_signOut) {
-            FirebaseAuth.getInstance().signOut();
-            LoginManager.getInstance().logOut();
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-        }
         return super.onOptionsItemSelected(item);
     }
 

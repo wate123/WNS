@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -16,6 +18,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -34,6 +37,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.facebook.FacebookSdk;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import weathernotificationservice.wns.*;
 
@@ -45,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements
     private FirebaseAuth auth;
     private ProgressBar progressBar;
     private Button btnSignup, btnLogin, btnReset, facebookLogin ;
+    private DatabaseReference mDatabase;
 
     //FaceBook callbackManager
     private CallbackManager mCallbackManager;
@@ -56,8 +62,10 @@ public class LoginActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
@@ -66,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements
 
         // set the view now
         setContentView(R.layout.activity_login);
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
+        findViewById(R.id.google_Login).setOnClickListener(this);
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
@@ -209,6 +217,7 @@ public class LoginActivity extends AppCompatActivity implements
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
+                            onAuthSuccess(task.getResult().getUser());
                             startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
@@ -236,14 +245,15 @@ public class LoginActivity extends AppCompatActivity implements
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
-                        if (!task.isSuccessful()) {
+                        if (task.isSuccessful()) {
+                            onAuthSuccess(task.getResult().getUser());
                             startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
                             finish();
                         } else {
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, weathernotificationservice.wns.activities.MainActivity.class));
+
                             finish();
                         }
 
@@ -259,12 +269,38 @@ public class LoginActivity extends AppCompatActivity implements
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
 
+    private String usernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
+    }
+
+    private void writeNewUser(String userId, String name, String email) {
+        User user = new User(name, email);
+
+        mDatabase.child("users").child(userId).setValue(user);
+    }
+
+    private void onAuthSuccess(FirebaseUser user) {
+        String username = usernameFromEmail(user.getEmail());
+
+        // Write new user
+        writeNewUser(user.getUid(), username, user.getEmail());
+
+        // Go to MainActivity
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        finish();
+    }
+
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.sign_in_button) {
+        if (i == R.id.google_Login) {
             signIn();
         }
+
     }
 }
 
