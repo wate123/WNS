@@ -8,7 +8,7 @@
      You are able to signup or sign in with email and password or Facebook.
  It only has weather forecast right now, but more features will be coming soon.
  
- Develope by Joseph Nguyen， Jun Lin, Derricka Royal, Freddie Weir.
+ Developed by Joseph Nguyen, Jun Lin, Derricka Royal, Freddie Weir.
  
  
  
