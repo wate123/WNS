@@ -21,6 +21,8 @@ import com.facebook.FacebookException;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -57,10 +59,12 @@ public class LoginActivity extends AppCompatActivity implements
     private static final String TAG = "FacebookLogin";
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //Get Firebase auth instance
@@ -74,6 +78,12 @@ public class LoginActivity extends AppCompatActivity implements
 
         // set the view now
         setContentView(R.layout.activity_login);
+
+        //add admob
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         findViewById(R.id.google_Login).setOnClickListener(this);
 
         inputEmail = (EditText) findViewById(R.id.email);

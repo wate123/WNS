@@ -65,6 +65,8 @@ import weathernotificationservice.wns.tasks.TaskOutput;
 import weathernotificationservice.wns.utils.UnitConvertor;
 import weathernotificationservice.wns.widgets.AbstractWidgetProvider;
 import weathernotificationservice.wns.widgets.DashClockWeatherExtension;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
     protected static final int MY_PERMISSIONS_ACCESS_FINE_LOCATION = 1;
@@ -105,6 +107,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     public String recentCity = "";
 
+    private static final String TAG = "MainActivity";
+
+    private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Initialize the associated SharedPreferences file with default values
@@ -120,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         setContentView(R.layout.activity_scrolling);
         appView = findViewById(R.id.viewApp);
 
+
         progressDialog = new ProgressDialog(MainActivity.this);
 
         //Load toolbar
@@ -128,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         if (darkTheme) {
             toolbar.setPopupTheme(R.style.AppTheme_PopupOverlay_Dark);
         }
+
 
         // Initialize textboxes
         todayTemperature = (TextView) findViewById(R.id.todayTemperature);
@@ -156,6 +164,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         // Set autoupdater
         AlarmReceiver.setRecurringAlarm(this);
+
     }
 
     public WeatherRecyclerAdapter getAdapter(int id) {
