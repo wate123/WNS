@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryLogin">#2196F3</color>
-    <color name="colorPrimaryDarkSign">#006caf</color>
+    <color name="colorPrimaryLogin">#151414</color>
+    <color name="colorPrimaryDarkSign">#09090a</color>
     <color name="colorAccentSign">#f2fe71</color>
     <color name="bg_login">#26ae90</color>
     <color name="bg_register">#2e3237</color>
@@ -17,7 +17,7 @@
     <color name="lbl_name">#333333</color>
     <color name="btn_logut_bg">#ff6861</color>
 
-    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimary">#151414</color>
     <color name="colorPrimaryDark">#1E88E5</color>
     <color name="colorAccent">#1E88E5</color>
     <color name="colorBackground">@android:color/transparent</color>
@@ -41,7 +41,7 @@
     <color name="classic_darkTheme_colorBackground">#303030</color>
     <color name="classic_darkTheme_colorTintedBackground">#263238</color>
 
-    <color name="splashBackground">#607d8b</color>
+    <color name="splashBackground">#000000</color>
 
 
 

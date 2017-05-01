@@ -13,6 +13,14 @@
         android:title="@string/action_search"
         app:showAsAction="always" />
     <item
+        android:id="@+id/action_account"
+        android:title="@string/action_account"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_friendlist"
+        android:title="@string/action_friendlist"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_map"
         android:icon="@drawable/ic_map_white_24dp"
         android:title="@string/action_weather_map"
@@ -25,14 +33,13 @@
         android:id="@+id/action_location"
         android:title="@string/setting_auto_detect_location"
         app:showAsAction="never" />
+
+
     <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_signOut"
-        android:title="@string/action_signOut"
-        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_about"
         android:title="@string/action_about"

@@ -23,17 +23,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="weathernotificationservice.wns.activities.LoginActivity" android:theme="@style/AppTheme.Dark" />
-        <activity android:name="weathernotificationservice.wns.activities.SignupActivity" android:theme="@style/AppTheme.Dark" />
-        <activity android:name="weathernotificationservice.wns.activities.ResetPasswordActivity" android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:theme="@style/AppTheme.NoStatusBar" />
+        <activity
+            android:name=".activities.Friends"
+            android:theme="@style/AppTheme.NoStatusBar" />
+        <activity
+            android:name=".activities.SignupActivity"
+            android:theme="@style/AppTheme.NoStatusBar" />
+        <activity
+            android:name=".activities.ResetPasswordActivity"
+            android:theme="@style/AppTheme.NoStatusBar" />
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!--<activity-->
-            <!--android:name=".activities.SignupActivity"-->
-            <!--android:label="@string/title_activity_login"-->
-            <!--android:theme="@style/AppTheme.NoActionBar" />-->
+        <!-- <activity -->
+        <!-- android:name=".activities.SignupActivity" -->
+        <!-- android:label="@string/title_activity_login" -->
+        <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
@@ -46,7 +55,6 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -56,11 +64,10 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <!--<activity-->
-            <!--android:name=".activities.ResetPasswordActivity"-->
-            <!--android:label="@string/title_activity_reset_password"-->
-            <!--android:theme="@style/AppTheme.NoActionBar"></activity>-->
-
+        <!-- <activity -->
+        <!-- android:name=".activities.ResetPasswordActivity" -->
+        <!-- android:label="@string/title_activity_reset_password" -->
+        <!-- android:theme="@style/AppTheme.NoActionBar"></activity> -->
 
         <activity
             android:name=".activities.SettingsActivity"
@@ -122,6 +129,8 @@
             android:label="@string/action_graphs"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.AccountSetting" />
+
     </application>
 
 </manifest>
